@@ -2,36 +2,55 @@
 
 import nodemailer from 'nodemailer';
 
-async function sendEmail(fullname: string, email: string, message: string) {
+async function sendEmail(
+  fullname: string,
+  email: string,
+  message: string
+) {
   try {
     const transporter = nodemailer.createTransport({
-      host: process.env.NODEMAILER_HOST,
-      port: parseInt(process.env.NODEMAILER_PORT!),
+      host: process.env.NODEMAILER_HOST || 'smtp.gmail.com',
+      port: Number(process.env.NODEMAILER_PORT) || 587,
+      secure: false,
       auth: {
         user: process.env.NODEMAILER_USER,
         pass: process.env.NODEMAILER_PASS,
       },
     });
 
+    await transporter.verify();
+
     const mailOptions = {
-      from: process.env.USER_MAILER,
-      to: process.env.USER_TO,
-      subject: `${fullname} sent you a message`,
+      from: `"Portfolio Contact Form" <${process.env.NODEMAILER_USER}>`,
+      to: 'vishalsahani4747@gmail.com',
+      replyTo: email,
+      subject: `📩 New Portfolio Message from ${fullname}`,
       html: `
-      <h1>Message from ${fullname}</h1>
-      <p>Email: ${email}</p>
-      <p>${message}</p>
+        <div style="font-family: Arial, sans-serif; padding:20px;">
+          <h2>New Contact Form Submission</h2>
+
+          <p><strong>Name:</strong> ${fullname}</p>
+          <p><strong>Email:</strong> ${email}</p>
+
+          <hr />
+
+          <h3>Message</h3>
+          <p>${message}</p>
+        </div>
       `,
     };
 
     await transporter.sendMail(mailOptions);
+
     return {
-      success: "Message sent successfully, I'll get back to you soon. 🤖",
+      success: "Message sent successfully! I'll get back to you soon. 🚀",
     };
   } catch (error: any) {
+    console.error('MAIL ERROR:', error);
+
     return {
       error:
-        'There seems a problem with the email service, please try again later. 🤖',
+        'Unable to send email right now. Please try again later.',
     };
   }
 }
@@ -40,49 +59,45 @@ export async function sendMessageServerAction(
   _previousState: any,
   formData: FormData
 ) {
-  // Validate inputs first
-  const fullname = (formData.get('fullname') as string)?.trim();
-  const email = (formData.get('email') as string)?.trim();
-  const message = (formData.get('message') as string)?.trim();
+  const fullname = String(formData.get('fullname') || '').trim();
+  const email = String(formData.get('email') || '').trim();
+  const message = String(formData.get('message') || '').trim();
 
-  // validate fullname
-  if (fullname?.length <= 2) {
+  if (fullname.length < 3) {
     return {
-      fullnameError:
-        'Wow, your name seems to be in stealth mode! 😄 How about unleashing the full version this time?',
+      fullnameError: 'Please enter your full name.',
     };
   }
 
-  // validate email using regex
-  if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!emailRegex.test(email)) {
     return {
-      emailError:
-        'Oops! Looks like your email just threw a curveball at my regex skills 😅. Let’s give it another shot—what do you say?',
+      emailError: 'Please enter a valid email address.',
     };
   }
 
-  // validate message
-  if (message?.length <= 10) {
+  if (message.length < 10) {
     return {
-      messageError: 'That’s a bit brief! 😅 Let it flow—share the whole story!',
+      messageError: 'Message must contain at least 10 characters.',
     };
   }
 
-  // If validation passes, try to send email
-  try {
-    const response = await sendEmail(fullname, email, message);
-    console.log('Response: ', response);
-    if (response.success) {
-      return {
-        success: "Message sent successfully, I'll get back to you soon. 🤖",
-      };
-    }
+  const response = await sendEmail(
+    fullname,
+    email,
+    message
+  );
+
+  if (response.success) {
     return {
-      error: 'Something went wrong, please try again later. 🤖',
-    };
-  } catch (error: any) {
-    return {
-      error: 'Something went wrong, please try again later. 🤖',
+      success: response.success,
     };
   }
+
+  return {
+    error:
+      response.error ||
+      'Something went wrong. Please try again later.',
+  };
 }

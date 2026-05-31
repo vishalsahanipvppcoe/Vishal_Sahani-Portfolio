@@ -118,6 +118,8 @@
   }
   html {
   /* @apply scroll-smooth; */
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
   font-size: 100%; /* mobile default */
 }
 
@@ -238,4 +240,8 @@ h6 {
 
 p {
   @apply leading-[1.65rem] [&:not(:first-child)]:mt-6;
+}
+
+section {
+  scroll-margin-top: 90px;
 }
