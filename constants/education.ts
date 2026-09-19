@@ -1,22 +1,56 @@
 import { TimelineViewerData } from '@/types/TimelineViewer.types';
 
+export interface EducationItem {
+  institution: string;
+  degree: string;
+  field: string;
+  score: string;
+  location: string;
+  duration: string;
+}
+
+export interface CertificationItem {
+  title: string;
+  organization: string;
+  logo?: string;
+  link?: string;
+}
+
 export const education: TimelineViewerData[] = [
   {
     title:
-      "Bachelor of Engineering (B.E.) in Information Technology · Mumbai University · Vasantdada Patil Pratishthan's College of Engineering, Mumbai",
-    date: 'Aug 2023 – 2027 (Expected)',
-    description: `Currently pursuing B.E. in Information Technology with a strong focus on Full Stack Web Development and Data Structures & Algorithms using Java. Actively building real-world projects using the MERN stack and exploring AI-integrated applications. Current SGPI: 8.3.`,
+      "Bachelor of Engineering (B.E.) in Information Technology · Vasantdada Patil Pratishthan's College of Engineering (University of Mumbai)",
+    date: 'Aug 2023 – May 2027',
+    description: `Pursuing B.E. in Information Technology with a strong CGPA of 8.30. Specializing in full-stack web systems (MERN), Java, DSA, DBMS, and AI API integrations.`,
+    latest: true,
+  },
+];
+
+export const educationData: EducationItem[] = [
+  {
+    institution: "Vasantdada Patil Pratishthan's College of Engineering (University of Mumbai)",
+    degree: 'B.E. in Information Technology',
+    field: 'Information Technology',
+    score: 'CGPA: 8.30',
+    location: 'Mumbai, Maharashtra',
+    duration: 'Aug 2023 – May 2027',
+  },
+];
+
+export const certificationsData: CertificationItem[] = [
+  {
+    organization: 'Simplilearn',
+    title: 'Full Stack Java',
+    logo: '/simplilearn-transparent.png',
   },
   {
-    title:
-      "Higher Secondary Education (12th) · Elphinstone College, Mumbai",
-    date: '2021 – 2023',
-    description: `Completed Higher Secondary Education in Science stream with a strong foundation in Mathematics and Logical Reasoning, which supports problem-solving in programming and engineering.`,
+    organization: 'NPTEL, IIT Kharagpur',
+    title: 'Database Management Systems (DBMS)',
+    logo: '/nptel-clean.png',
   },
   {
-    title:
-      "Secondary Education (10th) · Sainath English High School",
-    date: '2021',
-    description: `Completed SSC with strong academic performance. Developed early interest in computers, technology, and problem-solving.`,
+    organization: 'QUASAR National Hackathon',
+    title: 'QUASAR 3.0 & 4.0 (2,600+ Registrations)',
+    logo: '/quasar-clean.png',
   },
 ];

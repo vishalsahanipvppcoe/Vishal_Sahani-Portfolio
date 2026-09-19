@@ -27,8 +27,7 @@ const AboutMePage = () => {
         {/* Paragraph 2 */}
         <PageHeaderDescription>
           Developed production-level applications with authentication, payment integration,
-          and optimized database architecture. Built projects like <strong>AI Placement Platform</strong>,
-          <strong> StudyNotion</strong>, and <strong>Wanderlust</strong>, focusing on scalable system design and real-world problem solving.
+          and optimized database architecture. Built projects like <strong>CareerSkill Build</strong> (AI-Powered Career Intelligence SaaS) and <strong>ConnectLocal</strong> (Hyperlocal Microservices Platform), focusing on scalable system design and real-world problem solving.
         </PageHeaderDescription>
 
         {/* Paragraph 3 */}
