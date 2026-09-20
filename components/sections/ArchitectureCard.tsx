@@ -78,7 +78,7 @@ export function ArchitectureCard() {
       <div className="mt-4 pt-3 border-t border-border flex items-center justify-between text-[11px]">
         <span className="flex items-center gap-1.5 text-foreground font-medium">
           <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-          Sub-150ms Gateway Routing
+          API Gateway Routing
         </span>
         <span className="font-mono text-[10px] text-muted-foreground">Containerized Services</span>
       </div>
