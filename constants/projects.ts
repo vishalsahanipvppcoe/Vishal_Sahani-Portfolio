@@ -1,135 +1,126 @@
-export const projects = [
+export interface Project {
+  title: string;
+  slug: string;
+  subtitle: string;
+  tagline?: string;
+  overview?: string;
+  number: string;
+  techStack: string[];
+  featuresTitle?: string;
+  features: string[];
+  challenges?: string[];
+  learnings?: string[];
+  architecture?: {
+    flow: string[];
+    services: string[];
+  };
+  feedback?: boolean;
+  comingSoon?: boolean;
+  links: {
+    live: string;
+    github: string;
+  };
+}
+
+export const projects: Project[] = [
   {
-    title: "AI Placement Platform (MERN + Gemini AI)",
-    slug: "ai-placement-platform",
-    tagline:
-      "AI-powered platform to evaluate placement readiness with real-time interview feedback.",
-
-    overview:
-      "Built a full-stack platform to assess student placement readiness using DSA, aptitude, and project evaluation. Integrated Gemini API to simulate real interview scenarios and generate personalized improvement insights.",
-
+    title: 'CareerSkill Build',
+    slug: 'careerskill-build',
+    number: '1',
+    subtitle: 'AI-Powered Career Intelligence SaaS',
+    tagline: 'AI-Powered Career Intelligence SaaS platform with Gemini & NVIDIA API integration',
+    overview: 'An AI-powered MERN SaaS platform for career guidance, recruitment, and learning management featuring role-based dashboards and resume analysis.',
     techStack: [
-      "MongoDB",
-      "Express.js",
-      "React.js",
-      "Node.js",
-      "Gemini API",
+      'React.js',
+      'Node.js',
+      'Gemini API',
+      'NVIDIA API',
+      'MongoDB',
+      'JWT Authentication',
+      'Docker',
+      'Redis',
+      'Razorpay',
     ],
-
+    featuresTitle: 'Features:',
     features: [
-      "AI-based interview feedback using Gemini API",
-      "Multi-factor scoring system (DSA, aptitude, projects)",
-      "Personalized improvement suggestions",
-      "Real-time performance tracking dashboard",
+      'AI-powered MERN SaaS platform for career guidance and learning management',
+      'Integrated Google Gemini API & NVIDIA API for resume analysis and skill-gap detection',
+      'Developed JWT authentication, RBAC, recruiter dashboards, and Razorpay payments',
+      'Scalable REST APIs with MongoDB-backed analytics tracking',
     ],
-
     challenges: [
-      "Designing a fair scoring algorithm combining multiple metrics",
-      "Handling real-time AI responses efficiently",
-      "Structuring dynamic evaluation data in backend",
+      'Handling real-time AI prompt responses with minimal latency',
+      'Structuring flexible MongoDB schemas for multi-tenant recruiter analytics',
+      'Ensuring secure payment webhooks and role-based access control',
     ],
-
     learnings: [
-      "Practical experience with LLM integration in real-world apps",
-      "Improved backend system design and data modeling",
-      "Built scalable evaluation logic for performance tracking",
+      'Practical LLM fine-tuning and prompt engineering workflows',
+      'Production-grade MERN architecture and state synchronization',
+      'Payment gateway lifecycle and error resilience',
     ],
-
-    feedback: false,
-
-    links: {
-      live: "#",
-      github: "#",
-    },
-  },
-
-  {
-    title: "StudyNotion – Full Stack EdTech Platform",
-    slug: "studynotion",
-    tagline:
-      "Production-level EdTech platform with authentication, payments, and role-based access.",
-
-    overview:
-      "Developed a scalable MERN-based EdTech platform supporting students and instructors with secure authentication, course management, and integrated payments using Razorpay.",
-
-    techStack: [
-      "MongoDB",
-      "Express.js",
-      "React.js",
-      "Node.js",
-      "JWT",
-      "Razorpay",
-      "Cloudinary",
-    ],
-
-    features: [
-      "JWT authentication with OTP verification",
-      "Role-based system (Student, Instructor, Admin)",
-      "Course management with cart and wishlist",
-      "Secure Razorpay payment integration",
-      "Cloudinary-based media storage",
-    ],
-
-    challenges: [
-      "Implementing secure OTP authentication flow",
-      "Designing scalable REST APIs",
-      "Integrating payment gateway securely",
-    ],
-
-    learnings: [
-      "Strong understanding of full-stack MERN architecture",
-      "Real-world experience with payment systems",
-      "Improved backend API design and database structuring",
-    ],
-
     feedback: true,
-
     links: {
-      live: "https://m-three-red.vercel.app/",
-      github: "https://github.com/vishalsahanipvppcoe/StudyNotion",
+      live: 'https://studynotion-liard-zeta.vercel.app/',
+      github: 'https://github.com/vishalsahanipvppcoe/Studynotion',
     },
   },
-
   {
-    title: "Wanderlust – Property Listing Platform",
-    slug: "wanderlust",
-    tagline:
-      "Full-stack property listing platform with authentication and review system.",
-
-    overview:
-      "Built a backend-focused property listing platform with authentication, CRUD operations, and user-generated reviews using MVC architecture.",
-
+    title: 'ConnectLocal',
+    slug: 'connect-local',
+    number: '2',
+    subtitle: 'Hyperlocal Community Platform & Microservices Architecture',
+    comingSoon: true,
+    tagline: 'Microservices & vertical architecture platform for hyperlocal commerce, community feeds, and location discovery',
+    overview: 'A high-performance hyperlocal community platform designed with a vertical architecture flow connecting clients via API Gateway to dedicated services for businesses, activities, community feeds, and auth.',
     techStack: [
-      "MongoDB",
-      "Express.js",
-      "Node.js",
-      "EJS",
+      'Spring Boot',
+      'Node.js',
+      'PostgreSQL',
+      'Redis',
+      'Firebase',
+      'Google Maps API',
+      'JWT Authentication',
+      'Docker',
     ],
-
+    featuresTitle: 'System Architecture & Highlights:',
     features: [
-      "User authentication and authorization",
-      "CRUD operations for property listings",
-      "Review and rating system",
-      "Role-based access control",
+      'API Gateway with request routing, rate limiting & throttling for resilient service communication',
+      'Business Service managing hyperlocal offers, catalog indexing, and merchant listings',
+      'Activity & Community Services handling event discovery, posts, and real-time feeds',
+      'Integrated Google Maps API for geolocation discovery, Redis caching & Firebase real-time notifications',
     ],
-
     challenges: [
-      "Implementing MVC architecture in backend",
-      "Designing secure authorization system",
-      "Managing complex CRUD operations",
+      'Designing low-latency API gateway routing and rate throttling across microservices',
+      'Optimizing spatial queries and location radius calculations in PostgreSQL with Redis caching',
+      'Structuring event-driven messaging patterns (Future: Kafka / Pub-Sub)',
     ],
-
     learnings: [
-      "Strong backend fundamentals and API design",
-      "Hands-on experience with MVC pattern",
-      "Improved database handling and application structure",
+      'Microservices decomposition with dedicated vertical domain boundaries',
+      'Redis caching strategies for frequent location-based catalog lookups',
+      'Containerized deployment using Docker for reproducible local and cloud environments',
     ],
-
-    feedback: false,
-
+    architecture: {
+      flow: [
+        'Client (React / Android Java/Kotlin)',
+        'API Gateway (Routing & Throttling)',
+        'Auth Service (JWT via Auth service)',
+        'Business Service (Offers & Listings)',
+        'Activity Service (Events & Feeds)',
+        'Community Service (Profiles & Posts)',
+      ],
+      services: [
+        'Spring Boot / Node.js backend services',
+        'PostgreSQL for relational spatial data',
+        'Redis for distributed caching',
+        'Firebase for real-time push events',
+        'Google Maps API for geospatial indexing',
+        'Dockerized service environment',
+      ],
+    },
+    feedback: true,
     links: {
-      live: "#",
-      github: "https://github.com/vishalsahanipvppcoe/wanderlust",
+      live: 'https://connectlocal.vercel.app',
+      github: 'https://github.com/vishalsahanipvppcoe/ConnectLocal',
     },
   },
 ];

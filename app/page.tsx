@@ -1,86 +1,38 @@
-import {
-  PageActions,
-  PageHeader,
-  PageHeaderDescription,
-  PageHeaderHeading,
-} from "@/components/page-header";
-import { Button } from "@/components/ui/button";
-import { siteConfig } from "@/config/site";
-import { ExternalLink } from "lucide-react";
-import Link from "next/link";
+import { HeroSection } from '@/components/sections/HeroSection';
+import { ProjectsSection } from '@/components/sections/ProjectsSection';
+import { ExperienceSection } from '@/components/sections/ExperienceSection';
+import { SkillsSection } from '@/components/sections/SkillsSection';
+import { EducationSection } from '@/components/sections/EducationSection';
+import { ContactSection } from '@/components/sections/ContactSection';
 
-import AboutSection from "@/components/sections/AboutSection";
-import ProjectsSection from "@/components/sections/ProjectsSection";
-import SkillsSection from "@/components/sections/SkillsSection";
-import ExperienceSection from "@/components/sections/ExperienceSection";
-import EducationSection from "@/components/sections/EducationSection";
-import ContactSection from "@/components/sections/ContactSection";
-import StatsSection from "@/components/sections/StatsSection";
-
-export default async function HomePage() {
+export default function HomePage() {
   return (
-    <>
-      {/* Introduction */}
-      <section id="home" className="min-h-screen py-20">
+    <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 space-y-12 pb-20">
+      {/* 1. Hero Section */}
+      <HeroSection />
 
-        <PageHeader>
-          <PageHeaderHeading>Vishal Sahani</PageHeaderHeading>
+      {/* 2. Featured Projects */}
+      <ProjectsSection />
 
-          <PageHeaderHeading className="mt-2 text-muted-foreground">
-            Full Stack Developer (MERN) | Building Scalable Web Apps
-          </PageHeaderHeading>
-
-          <PageHeaderDescription>
-            I build scalable and high-performance web applications using the
-            MERN stack, focusing on clean architecture, optimized APIs, and
-            real-world problem solving.
-            <br />
-            <br />
-            Currently pursuing B.E. in Information Technology from Mumbai
-            University, I have hands-on experience developing production-level
-            projects with authentication, payment integration, and database
-            optimization.
-            <br />
-            <br />
-            My key projects include <strong>AI Placement Platform</strong>,
-            <strong> StudyNotion (EdTech Platform)</strong>, and{" "}
-            <strong>Wanderlust</strong>, where I worked on backend scalability,
-            REST APIs, and user-centric features.
-          </PageHeaderDescription>
-
-          <PageActions>
-            <Button asChild size="sm" className="rounded-md">
-              <Link
-                href={siteConfig.links.resume}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Resume
-                <ExternalLink className="size-3" strokeWidth={2} />
-              </Link>
-            </Button>
-
-            <Button asChild size="sm" className="rounded-md">
-              <a
-                href={siteConfig.links.linkedin}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Contact Me
-                <ExternalLink className="size-3" strokeWidth={2} />
-              </a>
-            </Button>
-          </PageActions>
-        </PageHeader>
+      {/* 3. Work Experience & Technical Skills (2-column on desktop) */}
+      <section id="experience" className="grid grid-cols-1 gap-6 lg:grid-cols-12 items-stretch">
+        <div className="lg:col-span-7">
+          <ExperienceSection />
+        </div>
+        <div id="skills" className="lg:col-span-5">
+          <SkillsSection />
+        </div>
       </section>
 
-      <AboutSection />
-      <ProjectsSection />
-      <SkillsSection />
-      <ExperienceSection />
-      <EducationSection />
-      <StatsSection />
-      <ContactSection />
-    </>
+      {/* 4. Education & Contact Section (2-column on desktop) */}
+      <section id="education" className="grid grid-cols-1 gap-6 lg:grid-cols-12 items-stretch">
+        <div className="lg:col-span-5">
+          <EducationSection />
+        </div>
+        <div className="lg:col-span-7">
+          <ContactSection />
+        </div>
+      </section>
+    </div>
   );
 }

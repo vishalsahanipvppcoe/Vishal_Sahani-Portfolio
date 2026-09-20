@@ -1,41 +1,78 @@
-import {
-  PageHeader,
-  PageHeaderDescription,
-  PageHeaderHeading,
-} from "@/components/page-header";
-import TimelineViewer from "@/components/timeline-viewer";
-import { experiences } from "@/constants/experience";
+import { experiences } from '@/constants/experience';
 
-export default function ExperienceSection() {
+export function ExperienceSection() {
   return (
-    <section id="experience" className="min-h-screen py-20">
-      <PageHeader className="mb-10">
-        <PageHeaderHeading>Experience</PageHeaderHeading>
-
-        <PageHeaderHeading className="mt-2 text-muted-foreground">
-          Building scalable systems with a strong focus on backend engineering
-        </PageHeaderHeading>
-
-        <PageHeaderDescription>
-          Developed full-stack applications using the MERN stack, with a primary focus on backend systems,
-          REST API design, and efficient database architecture. Delivered solutions involving authentication,
-          payment integration, and performance-optimized workflows.
-        </PageHeaderDescription>
-
-        <PageHeaderDescription>
-          Designed and optimized APIs, structured MongoDB databases, and implemented clean, maintainable code
-          using industry-standard tools such as Git, GitHub, and Postman to ensure efficient development and collaboration.
-        </PageHeaderDescription>
-
-        <PageHeaderDescription>
-          Served as a TPO Student Coordinator, coordinating with teams and managing placement-related activities,
-          demonstrating leadership, communication, and organizational capabilities alongside technical expertise.
-        </PageHeaderDescription>
-      </PageHeader>
-
-      <div className="mt-6">
-        <TimelineViewer data={experiences} />
+    <div className="h-full flex flex-col">
+      <div className="mb-6 space-y-1">
+        <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+          Work Experience &amp; Leadership
+        </h2>
+        <p className="text-sm text-muted-foreground">
+          Software development internships &amp; engineering leadership.
+        </p>
       </div>
-    </section>
+
+      <div className="rounded-xl border border-border bg-card p-6 flex-1 flex flex-col justify-between shadow-sm">
+        <div className="space-y-6">
+          {experiences.map((exp) => (
+            <div key={exp.id} className="flex items-start gap-3.5">
+              {/* Number Badge */}
+              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 text-xs font-bold mt-0.5">
+                {exp.id}
+              </span>
+
+              {/* Content */}
+              <div className="flex-1 space-y-1.5">
+                <div className="flex flex-wrap items-baseline justify-between gap-1">
+                  <h3 className="text-sm font-semibold text-foreground">
+                    {exp.role}
+                  </h3>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-1.5 text-xs text-muted-foreground">
+                  <span className="font-medium text-foreground">{exp.company}</span>
+                  <span>•</span>
+                  <span>{exp.duration}</span>
+                  {exp.metrics && (
+                    <>
+                      <span>•</span>
+                      <span className="text-emerald-600 dark:text-emerald-400 font-semibold">{exp.metrics}</span>
+                    </>
+                  )}
+                </div>
+
+                {/* Tech stack pills if any */}
+                {exp.techStack && (
+                  <div className="flex flex-wrap gap-1 pt-1">
+                    {exp.techStack.map((tech) => (
+                      <span
+                        key={tech}
+                        className="rounded bg-muted/60 px-2 py-0.5 text-[11px] font-medium text-muted-foreground border border-border/70"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                )}
+
+                {/* Bullet Points */}
+                {exp.points && (
+                  <ul className="mt-2 space-y-1.5 text-xs text-muted-foreground">
+                    {exp.points.map((pt, i) => (
+                      <li key={i} className="flex items-start gap-1.5 leading-relaxed">
+                        <span className="text-emerald-500 select-none font-bold">•</span>
+                        <span>{pt}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }
+
+export default ExperienceSection;

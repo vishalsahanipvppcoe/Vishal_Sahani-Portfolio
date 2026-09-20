@@ -1,50 +1,25 @@
-import { PageHeader, PageHeaderHeading } from "@/components/page-header";
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { projects } from "@/constants/projects";
-import Link from "next/link";
+import { projects } from '@/constants/projects';
+import { ProjectCard } from './ProjectCard';
 
-export default function ProjectsSection() {
+export function ProjectsSection() {
   return (
-    <section id="projects" className="min-h-screen py-20">
-      <PageHeader className="mb-10">
-        <PageHeaderHeading>Projects</PageHeaderHeading>
+    <section id="projects" className="py-12 border-b border-border">
+      <div className="mb-6 space-y-1">
+        <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+          Featured Projects
+        </h2>
+        <p className="text-sm text-muted-foreground">
+          Production SaaS and distributed backend applications engineered for scale, AI capabilities, and performance.
+        </p>
+      </div>
 
-        <PageHeaderHeading className="mt-2 text-muted-foreground">
-          Scalable full-stack applications focused on performance, backend architecture, and real-world use cases
-        </PageHeaderHeading>
-      </PageHeader>
-
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {projects.map((project, index) => (
-          <Card
-            key={index}
-            className="relative w-full transition-all duration-300 cursor-pointer hover:scale-105"
-          >
-            <CardHeader>
-              <CardTitle className="leading-6">
-                {project.title}
-              </CardTitle>
-
-              <CardDescription className="flex flex-col gap-2">
-                {project.tagline}
-
-                <Link
-                  href={`/projects/${project.slug}`}
-                  className="text-muted-foreground"
-                >
-                  Learn More...
-                  <span className="absolute inset-0"></span>
-                </Link>
-              </CardDescription>
-            </CardHeader>
-          </Card>
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        {projects.map((project) => (
+          <ProjectCard key={project.slug} project={project} />
         ))}
       </div>
     </section>
   );
 }
+
+export default ProjectsSection;

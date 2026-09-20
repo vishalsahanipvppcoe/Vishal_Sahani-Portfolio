@@ -5,7 +5,7 @@ import {
 } from '@/components/page-header';
 import Pager from '@/components/pager';
 import TimelineViewer from '@/components/timeline-viewer';
-import { experiences } from '@/constants/experience';
+import { experiencesTimeline } from '@/constants/experience';
 
 const ExperiencePage = () => {
   return (
@@ -36,7 +36,7 @@ const ExperiencePage = () => {
 
       {/* Timeline */}
       <div className="mt-6">
-        <TimelineViewer data={experiences} />
+        <TimelineViewer data={experiencesTimeline} />
       </div>
 
       <Pager
