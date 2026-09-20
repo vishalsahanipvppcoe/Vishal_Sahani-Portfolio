@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { siteConfig } from '@/config/site';
 import { Mail, Phone, Linkedin, Code2, Send } from 'lucide-react';
 import { toast } from 'sonner';
+import { sendMessageServerAction } from '@/app/actions/sendMailServerAction';
 
 export function ContactSection() {
   const [formData, setFormData] = useState({
@@ -13,20 +14,62 @@ export function ContactSection() {
   });
   const [isSending, setIsSending] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.message) {
+    if (isSending) return;
+
+    const name = formData.name.trim();
+    const email = formData.email.trim();
+    const message = formData.message.trim();
+
+    if (!name || !email || !message) {
       toast.error('Please fill in all fields');
       return;
     }
 
+    if (name.length < 3) {
+      toast.error('Please enter your full name (at least 3 characters).');
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      toast.error('Please enter a valid email address.');
+      return;
+    }
+
+    if (message.length < 10) {
+      toast.error('Message must contain at least 10 characters.');
+      return;
+    }
+
     setIsSending(true);
-    setTimeout(() => {
-      window.location.href = `mailto:${siteConfig.links.displayEmail}?subject=Contact from ${encodeURIComponent(formData.name)}&body=${encodeURIComponent(formData.message)}%0A%0AFrom: ${encodeURIComponent(formData.email)}`;
-      toast.success('Opening your email client...');
+
+    try {
+      const data = new FormData();
+      data.append('fullname', name);
+      data.append('email', email);
+      data.append('message', message);
+
+      const response = await sendMessageServerAction(null, data);
+
+      if (response?.success) {
+        toast.success(response.success);
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        const errorMsg =
+          response?.fullnameError ||
+          response?.emailError ||
+          response?.messageError ||
+          response?.error ||
+          'Unable to send your message right now. Please try again later.';
+        toast.error(errorMsg);
+      }
+    } catch {
+      toast.error('Unable to send your message right now. Please try again later.');
+    } finally {
       setIsSending(false);
-      setFormData({ name: '', email: '', message: '' });
-    }, 600);
+    }
   };
 
   return (
@@ -55,8 +98,9 @@ export function ContactSection() {
                   type="text"
                   placeholder="Your Name"
                   value={formData.name}
+                  disabled={isSending}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full h-10 rounded-lg border border-border bg-background px-3.5 text-xs text-foreground placeholder:text-muted-foreground focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 focus:outline-none transition-all"
+                  className="w-full h-10 rounded-lg border border-border bg-background px-3.5 text-xs text-foreground placeholder:text-muted-foreground focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 focus:outline-none transition-all disabled:opacity-60 disabled:cursor-not-allowed"
                 />
               </div>
               <div>
@@ -68,8 +112,9 @@ export function ContactSection() {
                   type="email"
                   placeholder="Your Email"
                   value={formData.email}
+                  disabled={isSending}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full h-10 rounded-lg border border-border bg-background px-3.5 text-xs text-foreground placeholder:text-muted-foreground focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 focus:outline-none transition-all"
+                  className="w-full h-10 rounded-lg border border-border bg-background px-3.5 text-xs text-foreground placeholder:text-muted-foreground focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 focus:outline-none transition-all disabled:opacity-60 disabled:cursor-not-allowed"
                 />
               </div>
             </div>
@@ -83,8 +128,9 @@ export function ContactSection() {
                 rows={3}
                 placeholder="Your Message..."
                 value={formData.message}
+                disabled={isSending}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                className="w-full rounded-lg border border-border bg-background p-3.5 text-xs text-foreground placeholder:text-muted-foreground focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 focus:outline-none transition-all resize-none"
+                className="w-full rounded-lg border border-border bg-background p-3.5 text-xs text-foreground placeholder:text-muted-foreground focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 focus:outline-none transition-all resize-none disabled:opacity-60 disabled:cursor-not-allowed"
               />
             </div>
 

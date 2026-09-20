@@ -1,6 +1,7 @@
 'use server';
 
 import nodemailer from 'nodemailer';
+import { siteConfig } from '@/config/site';
 
 async function sendEmail(
   fullname: string,
@@ -22,7 +23,7 @@ async function sendEmail(
 
     const mailOptions = {
       from: `"Portfolio Contact Form" <${process.env.NODEMAILER_USER}>`,
-      to: 'vishalsahani4747@gmail.com',
+      to: siteConfig.links.displayEmail,
       replyTo: email,
       subject: `📩 New Portfolio Message from ${fullname}`,
       html: `
