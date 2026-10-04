@@ -50,10 +50,10 @@ const ContactForm = () => {
       <div className="mb-6 text-center text-sm text-muted-foreground">
         Or directly email me at{' '}
         <a
-          href="mailto:vishalsahani1018@gmail.com"
+          href="mailto:vishalsahani4747@gmail.com"
           className="underline font-medium"
         >
-          vishalsahani1018@gmail.com
+          vishalsahani4747@gmail.com
         </a>
       </div>
 

@@ -152,7 +152,7 @@ export function MobileNav() {
                   <div className="flex items-center gap-2 px-1">
                     <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border/50 to-transparent" />
 
-                    <h3 className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60">
+                    <h3 className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
                       {section.title}
                     </h3>
 

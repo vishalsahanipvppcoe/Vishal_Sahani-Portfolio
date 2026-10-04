@@ -2,7 +2,7 @@ import { Cpu, Server, Database, Globe, Layers, ArrowRight } from 'lucide-react';
 
 export function ArchitectureCard() {
   return (
-    <div className="w-full h-full rounded-xl border border-border bg-card p-5 shadow-sm flex flex-col justify-between">
+    <div className="w-full h-full rounded-2xl border border-border dark:border-slate-800/80 bg-card dark:bg-[#070d19]/90 p-5 sm:p-6 shadow-sm dark:shadow-xl backdrop-blur-sm flex flex-col justify-between group hover:border-border/90 dark:hover:border-slate-700 transition-all duration-300">
       {/* Header */}
       <div className="mb-4 flex items-center justify-between border-b border-border pb-3">
         <div>
@@ -22,9 +22,9 @@ export function ArchitectureCard() {
           <div className="rounded-lg border border-border/70 bg-muted/40 p-2.5 flex-1 flex flex-col justify-center">
             <div className="flex items-center gap-2 text-xs font-semibold text-foreground">
               <Globe className="h-3.5 w-3.5 text-cyan-500 shrink-0" />
-              <span>React.js / Android</span>
+              <span>React.js / Flutter</span>
             </div>
-            <p className="mt-1 text-[11px] text-muted-foreground">Web UI • Java/Kotlin Client</p>
+            <p className="mt-1 text-[11px] text-muted-foreground">Web UI • Flutter Client</p>
           </div>
 
           <div className="rounded-lg border border-border/70 bg-muted/40 p-2.5 flex-1 flex flex-col justify-center">

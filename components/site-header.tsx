@@ -57,11 +57,11 @@ export function SiteHeader() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-200 border-b ${
           scrolled
-            ? 'bg-transparent backdrop-blur-md border-slate-200/40 dark:border-white/[0.06] shadow-sm'
+            ? 'bg-background/85 backdrop-blur-md border-border shadow-xs'
             : 'bg-transparent border-transparent'
         }`}
       >
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-14 sm:h-16 items-center justify-between">
             {/* Left: Monogram Logo + Avatar */}
             <Link

@@ -23,7 +23,7 @@ const ContactPage = async () => {
 
         <PageHeaderDescription>
           You can reach out using the form below or directly via email at 
-          <strong> vishalsahani1018@gmail.com</strong>.
+          <strong> vishalsahani4747@gmail.com</strong>.
         </PageHeaderDescription>
       </PageHeader>
 

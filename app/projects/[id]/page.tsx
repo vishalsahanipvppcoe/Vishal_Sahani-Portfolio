@@ -8,7 +8,28 @@ import { Badge } from '@/components/ui/badge';
 
 import { siteConfig } from '@/config/site';
 import { ArrowLeftIcon, ExternalLinkIcon } from 'lucide-react';
+import { Metadata } from 'next';
 import Link from 'next/link';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  const project = await getProject(id);
+  if (!project) return { title: 'Project Not Found' };
+  return {
+    title: `${project.title} — ${siteConfig.name}`,
+    description: project.overview || project.tagline || project.description,
+  };
+}
+
+export async function generateStaticParams() {
+  return projects.map((project) => ({
+    id: project.slug,
+  }));
+}
 
 const getProject = async (slug: string) => {
   return projects.find((project) => project.slug === slug);
@@ -52,7 +73,14 @@ const ProjectDetails = async ({
       </div>
 
       <PageHeader>
-        <PageHeaderHeading>{project.title}</PageHeaderHeading>
+        <div className="flex items-center gap-3 flex-wrap">
+          <PageHeaderHeading>{project.title}</PageHeaderHeading>
+          {project.badge && (
+            <Badge variant="outline" className="border-sky-500/30 bg-sky-500/10 text-sky-600 dark:text-sky-400 text-xs px-2.5 py-0.5">
+              {project.badge}
+            </Badge>
+          )}
+        </div>
         <PageHeaderDescription>{project.tagline}</PageHeaderDescription>
         <PageHeaderDescription>{project.overview}</PageHeaderDescription>
       </PageHeader>
@@ -123,14 +151,14 @@ const ProjectDetails = async ({
         {project.links && (
           <div id="links" className="my-4">
             <h2 className="text-lg font-semibold">
-              {project.links.live && project.links.github ? 'Links' : 'Link'}
+              {project.links.live && project.links.live !== '#' && project.links.github ? 'Links' : 'Link'}
             </h2>
 
             <div className="flex flex-wrap items-center gap-2">
-              {project.links.live && (
+              {project.links.live && project.links.live !== '#' && (
                 <Link href={project.links.live} target="_blank">
                   <Badge variant="default" className="px-4 text-base">
-                    Live <ExternalLinkIcon className="w-4 h-4 -mt-2" />
+                    Live Project <ExternalLinkIcon className="w-4 h-4 -mt-2" />
                   </Badge>
                 </Link>
               )}

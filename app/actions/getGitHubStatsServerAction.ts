@@ -5,8 +5,12 @@ import { siteConfig } from "@/config/site";
 export async function getGitHubStatsServerAction() {
   try {
     const response = await fetch(
-      `https://api.github.com/users/${siteConfig.links.githubUsername}`
+      `https://api.github.com/users/${siteConfig.links.githubUsername}`,
+      { next: { revalidate: 3600 } }
     );
+    if (!response.ok) {
+      throw new Error(`GitHub API error: ${response.status}`);
+    }
     const data = await response.json();
     return {
       name: data.name,

@@ -27,10 +27,34 @@ export const metadata: Metadata = {
     title: `${siteConfig.name} — Software Developer`,
     description: siteConfig.description,
     siteName: siteConfig.name,
+    images: [
+      {
+        url: '/vishal-profile-hd.jpg',
+        width: 800,
+        height: 800,
+        alt: `${siteConfig.name} - Software Developer`,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary',
+    title: `${siteConfig.name} — Software Developer`,
+    description: siteConfig.description,
+    images: ['/vishal-profile-hd.jpg'],
   },
   icons: {
-    icon: '/favicon.ico',
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/android-chrome-192x192.png', sizes: '192x192', type: 'image/png' },
+    ],
+    shortcut: '/favicon.ico',
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
   },
+  manifest: '/site.webmanifest',
 };
 
 export const viewport: Viewport = {
@@ -57,9 +81,15 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:bg-emerald-600 focus:text-white focus:rounded-md focus:shadow-lg focus:outline-none"
+          >
+            Skip to main content
+          </a>
           <div className="relative flex min-h-screen flex-col">
             <SiteHeader />
-            <main className="flex-1 pt-16 sm:pt-20">{children}</main>
+            <main id="main-content" className="flex-1 pt-16 sm:pt-20">{children}</main>
             <SiteFooter />
           </div>
         </ThemeProvider>

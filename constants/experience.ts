@@ -1,22 +1,30 @@
 import { TimelineViewerData } from '@/types/TimelineViewer.types';
 
+export interface ExperienceDeliverable {
+  title: string;
+  description: string;
+  icon: 'monitor' | 'server' | 'database' | 'bot' | 'shield';
+}
+
 export interface ExperienceItem {
   id: number;
   role: string;
   company: string;
+  companyUrl?: string;
   location?: string;
   type?: string;
   duration: string;
   techStack?: string[];
   points?: string[];
+  deliverables?: ExperienceDeliverable[];
   metrics?: string;
 }
 
 export const experiencesTimeline: TimelineViewerData[] = [
   {
     title: 'Software Development Engineer (SDE) Intern · Chitralai',
-    date: 'Jun 2026 – Present',
-    description: 'Developed scalable full-stack features using React.js, TypeScript, Node.js, and Express.js with Docker.',
+    date: 'Jun 2026 – Sep 2026',
+    description: 'Developed scalable full-stack features using React 18, TypeScript, Node.js, Express, AWS, Redis, and Docker.',
     latest: true,
   },
   {
@@ -36,13 +44,24 @@ export const experiences: ExperienceItem[] = [
     id: 1,
     role: 'Software Development Engineer (SDE) Intern',
     company: 'Chitralai',
-    duration: 'Jun 2026 – Present',
-    type: 'Remote (Hyderabad, Telangana)',
-    techStack: ['React.js', 'TypeScript', 'Node.js', 'Express.js', 'REST APIs', 'Docker', 'Git', 'GitHub'],
+    companyUrl: 'https://chitralai.com',
+    duration: 'Jun 2026 – Sep 2026',
+    type: 'Remote (Hyderabad), Telangana',
+    techStack: [
+      'React 18',
+      'TypeScript',
+      'Node.js',
+      'Express.js',
+      'AWS (EC2, S3, DynamoDB, SQS)',
+      'Redis',
+      'Docker',
+      'GitHub Actions CI/CD',
+      'Tailwind CSS',
+    ],
     points: [
-      'Developed scalable full-stack application features using React.js, TypeScript, Node.js, and Express.js.',
-      'Built reusable REST APIs, authentication modules, and backend services following software engineering best practices.',
-      'Collaborated with developers using Git, GitHub, and Docker to debug issues and deliver production-ready features.',
+      'Developed and maintained full-stack application features using React, Node.js, and Express.js.',
+      'Engineered scalable RESTful APIs, backend integrations, and performance optimizations.',
+      'Collaborated with cross-functional teams to test, debug, and deploy production-ready updates.',
     ],
   },
   {
@@ -51,23 +70,25 @@ export const experiences: ExperienceItem[] = [
     company: 'EduSkills',
     duration: 'Jul 2025 – Sep 2025',
     type: 'Remote',
-    techStack: ['Java', 'SQL', 'HTML5', 'CSS3', 'JavaScript', 'REST APIs', 'DBMS', 'OOP'],
+    techStack: ['Java', 'Spring Boot', 'REST APIs', 'MySQL'],
     points: [
-      'Applied Java, OOP principles, Collections Framework, and Exception Handling to develop real-world solutions.',
-      'Built full-stack applications using Java, SQL, and backend RESTful API integration.',
-      'Strengthened problem-solving skills through hands-on database operations and system design.',
+      'Built full-stack applications with Java, SQL, and backend RESTful API integration.',
+      'Applied OOP principles, Collections Framework, and database design for real-world tasks.',
+      'Strengthened backend problem-solving through hands-on system architecture and DB optimization.',
     ],
   },
   {
     id: 3,
     role: 'Student Coordinator',
-    company: 'Training & Placement Office (TPO), PVPPCOE',
+    company: 'TPO, PVPPCOE',
+    companyUrl: 'https://pvppcoe.ac.in',
     duration: 'Jan 2025 – Jan 2026',
     type: 'Mumbai, Maharashtra',
-    metrics: '2,600+ Hackathon registrations',
+    techStack: ['Leadership', 'Communication', 'Event Management'],
     points: [
-      'Coordinated placement drives, mock interviews, and campus recruitment events for recruiters and students.',
-      'Co-managed the QUASAR 3.0 National Hackathon with 2,600+ registrations, handling event logistics and coordination.',
+      'Managed placement drives, mock interview sessions, and campus recruitment operations.',
+      'Co-organized QUASAR 2.0 National Hackathon with 2,800+ registrations and live coordination.',
+      'Facilitated direct coordination between corporate recruiters, student candidates, and faculty.',
     ],
   },
 ];

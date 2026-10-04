@@ -84,9 +84,8 @@ export function ContactSection() {
       </div>
 
       <div className="rounded-xl border border-border bg-card p-6 flex-1 flex flex-col justify-between shadow-sm">
-        <div className="space-y-5">
-          {/* Top: Message Form */}
-          <form onSubmit={handleSubmit} className="space-y-3.5">
+        <form onSubmit={handleSubmit} className="space-y-4 flex-1 flex flex-col justify-between">
+          <div className="space-y-3.5">
             {/* First line: Name & Email side-by-side */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
@@ -134,73 +133,77 @@ export function ContactSection() {
               />
             </div>
 
-            <button
-              type="submit"
-              disabled={isSending}
-              className="inline-flex h-9 w-full sm:w-auto items-center justify-center gap-2 rounded-lg bg-emerald-600 dark:bg-emerald-500 px-6 text-xs font-semibold text-white shadow-sm hover:bg-emerald-500 dark:hover:bg-emerald-400 transition-colors duration-150 disabled:opacity-50"
-            >
-              <Send className="h-3.5 w-3.5" />
-              {isSending ? 'Sending...' : 'Send Message'}
-            </button>
-          </form>
+            {/* Send Message & Direct Email on one line */}
+            <div className="flex flex-col sm:flex-row items-stretch gap-2.5 pt-1">
+              <button
+                type="submit"
+                disabled={isSending}
+                className="min-h-[46px] sm:min-h-0 sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-600 dark:bg-emerald-500 px-6 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-emerald-500 dark:hover:bg-emerald-400 transition-colors duration-150 disabled:opacity-50 cursor-pointer shrink-0"
+              >
+                <Send className="h-3.5 w-3.5" />
+                {isSending ? 'Sending...' : 'Send Message'}
+              </button>
 
-          {/* Bottom: Direct Email, Phone & Coding Profiles */}
-          <div className="border-t border-border pt-4 space-y-3.5">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div className="rounded-lg border border-border/70 bg-muted/40 p-3">
-                <span className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider block mb-1">
-                  Direct email
+              <div className="flex-1 rounded-xl border border-border/70 dark:border-slate-800 bg-muted/30 dark:bg-slate-900/60 p-2.5 flex flex-col justify-center">
+                <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider block mb-0.5">
+                  Direct Email
                 </span>
                 <a
                   href={siteConfig.links.email}
-                  className="flex items-center gap-2 text-xs font-medium text-foreground hover:text-emerald-500 transition-colors"
+                  className="flex items-center gap-1.5 text-xs font-semibold text-foreground hover:text-emerald-500 transition-colors"
                 >
                   <Mail className="h-3.5 w-3.5 text-emerald-500 shrink-0" />
-                  <span className="truncate">{siteConfig.links.displayEmail}</span>
+                  <span>{siteConfig.links.displayEmail}</span>
                 </a>
               </div>
+            </div>
+          </div>
 
-              <div className="rounded-lg border border-border/70 bg-muted/40 p-3">
-                <span className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider block mb-1">
+          {/* Bottom: Phone & Social Profiles in a sleek 2-column row */}
+          <div className="border-t border-border/80 dark:border-slate-800/80 pt-3.5 mt-3.5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              <div className="rounded-xl border border-border/70 dark:border-slate-800 bg-muted/30 dark:bg-slate-900/60 p-2.5 flex flex-col justify-center">
+                <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider block mb-1">
                   Phone
                 </span>
                 <a
                   href={`tel:${siteConfig.links.phone}`}
-                  className="flex items-center gap-2 text-xs font-medium text-foreground hover:text-emerald-500 transition-colors"
+                  className="flex items-center gap-1.5 text-xs font-semibold text-foreground hover:text-emerald-500 transition-colors"
                 >
                   <Phone className="h-3.5 w-3.5 text-emerald-500 shrink-0" />
                   <span>{siteConfig.links.displayPhone}</span>
                 </a>
               </div>
-            </div>
 
-            <div>
-              <span className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider block mb-2">
-                Coding &amp; Social Profiles
-              </span>
-              <div className="flex flex-wrap gap-2">
-                <a
-                  href={siteConfig.links.linkedin}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex h-8 items-center gap-1.5 rounded-lg border border-border/70 bg-muted/40 px-3 text-xs font-medium text-muted-foreground hover:border-border hover:text-foreground transition-colors"
-                >
-                  <Linkedin className="h-3.5 w-3.5 text-blue-500" />
-                  LinkedIn
-                </a>
-                <a
-                  href={siteConfig.links.leetcode}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex h-8 items-center gap-1.5 rounded-lg border border-border/70 bg-muted/40 px-3 text-xs font-medium text-muted-foreground hover:border-border hover:text-foreground transition-colors"
-                >
-                  <Code2 className="h-3.5 w-3.5 text-amber-500" />
-                  LeetCode
-                </a>
+              <div className="rounded-xl border border-border/70 dark:border-slate-800 bg-muted/30 dark:bg-slate-900/60 p-2.5 flex flex-col justify-center">
+                <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider block mb-1">
+                  Social Profiles
+                </span>
+                <div className="flex items-center gap-2">
+                  <a
+                    href={siteConfig.links.linkedin}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1 text-xs font-semibold text-foreground hover:text-blue-500 transition-colors"
+                  >
+                    <Linkedin className="h-3.5 w-3.5 text-blue-500" />
+                    <span>LinkedIn</span>
+                  </a>
+                  <span className="text-border dark:text-slate-800">•</span>
+                  <a
+                    href={siteConfig.links.leetcode}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1 text-xs font-semibold text-foreground hover:text-amber-500 transition-colors"
+                  >
+                    <Code2 className="h-3.5 w-3.5 text-amber-500" />
+                    <span>LeetCode</span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );

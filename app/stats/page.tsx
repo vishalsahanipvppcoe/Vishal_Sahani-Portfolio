@@ -22,13 +22,13 @@ const StatCard = ({
   className?: string;
 }) => (
   <div
-    className={`card border border-border/40 rounded-xl p-4 w-full h-full transition-transform duration-200 hover:scale-105 ${className}`}
+    className={`card bg-card text-foreground border border-border rounded-xl p-4 w-full h-full transition-transform duration-200 hover:scale-105 ${className}`}
   >
     <div className="card-content">
       <h3 className="text-lg font-semibold tracking-tight card-title text-muted-foreground">
         {title}
       </h3>
-      <span className="text-5xl font-bold leading-tight tracking-tight card-value">
+      <span className="text-5xl font-bold leading-tight tracking-tight card-value text-foreground">
         {value}
       </span>
     </div>
